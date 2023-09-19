@@ -1,0 +1,64 @@
+div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                            id="exampleModalLabel">
+                            {{ trans('My_Classes_trans.edit_class') }}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- edit_form -->
+                        <form action="{{ route('Classrooms.update', 'test') }}" method="post">
+                            {{ method_field('patch') }}
+                            @csrf
+                            <div class="row">
+                                <div class="col">
+                                    <label for="Name"
+                                            class="mr-sm-2">{{ trans('My_Classes_trans.Name_class') }}
+                                        :</label>
+                                        <input type="hidden" name="class_id" value="{{ $class->id }}">
+
+                                    <input class="form-control" type="text" value="{{ $class->getTranslation('calss_name','ar')}}" name="Name" />
+                                </div>
+                                <div class="col">
+                                    <label for="Name_en"
+                                            class="mr-sm-2">{{ trans('My_Classes_trans.Name_class_en') }}
+                                        :</label>
+                                        <input class="form-control" required type="text" value="{{ $class->getTranslation('calss_name','en')}}" name="Name_class_en" />
+
+                            </div>
+                            <br>
+                            <div class="form-group ">
+                                <label
+                                    for="exampleFormControlTextarea1">{{ trans('My_Classes_trans.Name_Grade') }}
+                                    :</label>
+                                <select class="form-control form-control-lg"
+                                        id="exampleFormControlSelect1" name="Grade_id">
+                                    <option value="{{ $class->Grades->id }}">
+                                        {{ $class->Grades->name }}
+                                    </option>
+                                    @foreach ($grades as $grade)
+                                        <option value="{{ $grade->id }}">
+                                            {{ $grade->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                                <br><br>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">{{ trans('grade_trans.Close') }}</button>
+                                <button type="submit"
+                                        class="btn btn-success">{{ trans('grade_trans.submit') }}</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
